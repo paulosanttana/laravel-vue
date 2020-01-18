@@ -3,6 +3,14 @@
 
 <br>
 
+
+- [Install](#Install)
+- [Ativar VueJs](#Ativar-VueJs)
+- [Criando component](#Criando-component)
+- [Configurando view routers](#Configurando-view-routers)
+- [Configurando Vuex](#Configurando-Vuex)
+- [BrowserSync](#BrowserSync)
+
 **Projeto Laravel VUE**
 
 Consumindo API Laravel com VueJs.
@@ -40,7 +48,7 @@ npm run prod
 Estrutura do VueJs fica dentro de `resource\assets\js`
 
 
-**Ativar VueJs**
+## Ativar VueJs
 
 4. Adicione no arquivo `welcome.blade.php` o seletor id `app` e link ao `/js/app.js` usando o helper do Laravel Mix, pode usar o helper `url()` ou `assets()` também se quiser.
 ```php
@@ -76,6 +84,8 @@ Adicione ao `heard` a tag `<meta>` passando o `csrf_token` para não aparecer me
 <style>
     ...
 ```
+
+## Criando component
 
 **Trabalhado Vue com Laravel**
 
@@ -174,7 +184,7 @@ const store = new Vuex.Store({
 export default store
 ```
 
-## Browser Mix
+## BrowserSync
 
 >Rodar o browserSync é opcional, pois ele irá atualizar o browser automaticamente o que facilita o desenvolvimento da aplicação. Porém se não quiser pode continuar usando o `npm run dev` para compilar a aplicação toda vez que realizar atualização e atualizar o browser manualmente `F5`.
 
