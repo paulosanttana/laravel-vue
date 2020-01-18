@@ -3,6 +3,11 @@
 
 <br>
 
+**Projeto Laravel + VueJs**
+
+Esse projeto utiliza Laravel 5.7 e Mysql.
+
+**Contents**
 
 - [Install](#Install)
 - [Ativar VueJs](#Ativar-VueJs)
