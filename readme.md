@@ -80,3 +80,94 @@ Adicione ao `heard` a tag `<meta>` passando o `csrf_token` para não aparecer me
 **Trabalhado Vue com Laravel**
 
 Uma das formar e criar componente e incluir na view do laravel.
+
+5. Crie component `TestComponent.vue` e adicione o código
+```php
+// resources\js\component
+
+<template>
+    <div>
+        <h1>Sou um component vue JS =D</h1>
+    </div>
+</template>
+
+
+<script>
+export default {
+    // scripts javascript
+}
+</script>
+
+
+<style scoped>
+    /* CSS */
+</style>
+``` 
+
+5.1 Declare o component
+```php
+// resources\js\app.js
+
+require('./bootstrap');
+window.Vue = require('vue');
+
+
+import router from './routes/routers'   // importado component
+
+
+/***
+ * Components globais
+ */
+Vue.component('test-component', require('./components/TestComponent').default)  // Declara component
+
+const app = new Vue({
+```
+
+
+*sempre após editar, compilar `npm run dev`*
+
+
+## Configurando view routers 
+
+6. Cria pasta `routes` dentro do diretório `resources\assets\js` e dentro do novo diretório adicione arquivo `routers.js` com o código abaixo:
+```php
+
+``` 
+
+## Configurando Vuex
+
+7. Cria diretório `vuex` e dentro adicione arquivo `store.js`.
+
+> resource\js\vuex\store.js
+
+7.1 Adicione o código no `store.js`
+```javascript
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+import Categories from './modules/categories/categories'
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+    modules: {
+        categories: Categories
+    }
+})
+
+export default store
+```
+
+## Browser Mix
+
+8. Configurar browser mix no arquivo `webpack.mix.js`.
+```javascript
+// webpack.mix.js
+mix.browserSync('http://127.0.0.1:8000/')   
+```
+
+8.1 Execute o para que o `watch` compile automaticamente a cada mudança. E o browserSync atualiza o browser.
+```bash
+npm run watch
+``` 
+

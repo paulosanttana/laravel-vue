@@ -6,11 +6,19 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
 
 
+import router from './routes/routers'
+import store from './vuex/store'
+
+/***
+ * Components globais
+ */
+Vue.component('test-component', require('./components/TestComponent').default)
 
 const app = new Vue({
+    router,
+    store,
     el: '#app'
 });
