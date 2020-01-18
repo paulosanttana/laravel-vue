@@ -130,13 +130,29 @@ const app = new Vue({
 ## Configurando view routers 
 
 6. Cria pasta `routes` dentro do diretório `resources\assets\js` e dentro do novo diretório adicione arquivo `routers.js` com o código abaixo:
-```php
+```javascript
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
+
+Vue.use(VueRouter)
+
+const routes = [
+    // Todas Rotas
+
+]
+
+const router = new VueRouter({
+    routes
+})
+
+
+export default router
 ``` 
 
 ## Configurando Vuex
 
-7. Cria diretório `vuex` e dentro adicione arquivo `store.js`.
+7. Crie diretório `vuex` e dentro adicione arquivo `store.js`.
 
 > resource\js\vuex\store.js
 
@@ -160,13 +176,16 @@ export default store
 
 ## Browser Mix
 
+>Rodar o browserSync é opcional, pois ele irá atualizar o browser automaticamente o que facilita o desenvolvimento da aplicação. Porém se não quiser pode continuar usando o `npm run dev` para compilar a aplicação toda vez que realizar atualização e atualizar o browser manualmente `F5`.
+>No procedimento abaixo iremos rodar o `npm run watch`, através dele será executado a compilação da aplicação e atualizar o browser automaticamente .
+
 8. Configurar browser mix no arquivo `webpack.mix.js`.
 ```javascript
 // webpack.mix.js
 mix.browserSync('http://127.0.0.1:8000/')   
 ```
 
-8.1 Execute o para que o `watch` compile automaticamente a cada mudança. E o browserSync atualiza o browser.
+8.1 Execute o comando para que o `watch` compile automaticamente a cada mudança. E o `browserSync` atualiza o browser.
 ```bash
 npm run watch
 ``` 
