@@ -5,7 +5,10 @@
 
 **Projeto Laravel + VueJs**
 
-Esse projeto utiliza Laravel 5.7 e Mysql.
+Consumindo API Laravel com VueJs. Esse projeto utiliza Laravel 5.7 e Mysql.
+
+
+
 
 **Contents**
 
@@ -16,9 +19,7 @@ Esse projeto utiliza Laravel 5.7 e Mysql.
 - [Configurando Vuex](#Configurando-Vuex)
 - [BrowserSync](#BrowserSync)
 
-**Projeto Laravel VUE**
 
-Consumindo API Laravel com VueJs.
 
 
 **Install**
