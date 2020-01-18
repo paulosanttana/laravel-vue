@@ -177,6 +177,7 @@ export default store
 ## Browser Mix
 
 >Rodar o browserSync é opcional, pois ele irá atualizar o browser automaticamente o que facilita o desenvolvimento da aplicação. Porém se não quiser pode continuar usando o `npm run dev` para compilar a aplicação toda vez que realizar atualização e atualizar o browser manualmente `F5`.
+
 >No procedimento abaixo iremos rodar o `npm run watch`, através dele será executado a compilação da aplicação e atualizar o browser automaticamente .
 
 8. Configurar browser mix no arquivo `webpack.mix.js`.
