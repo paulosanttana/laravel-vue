@@ -215,7 +215,9 @@ npm run watch
 9. Crie três pastas `admin` `frontend` e `layouts` dentro do diretório `components`.
 
 `resources\js\components\admin`      (todos components referente administração)
+
 `resources\js\components\frontend`   (todos components referente ao frontend)
+
 `resources\js\components\layouts`    (todos compoents compativel ao frontend e backend)
 
 9.1 Cria component `AdminComponent.vue` dentro da pasta `Admin`.
@@ -239,8 +241,9 @@ export default {
 
 9.2 Crie duas pastas `layouts` e `pages` dentro do diretório `admin`.
 
-- resources\js\components\admin\layouts  (Todos components reutilizaveis dentro do compomente admin)
-- resources\js\components\admin\pages    (gestão de paginas de administração)
+`resources\js\components\admin\layouts`  (Todos components reutilizaveis dentro do compomente admin)
+
+`resources\js\components\admin\pages`    (gestão de paginas de administração)
 
 9.3 Criar pasta `categories` dentro de `pages`. E adicione component. `CategoriesComponent.vue`
 
