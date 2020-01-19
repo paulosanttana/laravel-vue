@@ -67,8 +67,10 @@
     </head>
     <body>
         <div id="app">
+            <preloader-component></preloader-component>
 
-            <app-component></app-component>
+            
+            <router-view></router-view>
 
         </div>
 

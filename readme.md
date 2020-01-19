@@ -326,9 +326,50 @@ Vue.component('app-component', require('./components/App'))
 </html>
 ```
 
+## Organizando rotas Admin Categorias
+
+10. Criar pasta `dashboard` dentro de `reources\js\components\admin\pages`, em seguida adicione crie component `DashboardComponent.vue`.
+```vue 
+// reources\js\components\admin\pages\DashboardComponent
+
+<template>
+    <div>
+        pagina dashboard
+    </div>
+</template>
+```
+
+10.1 Define url no arquivo de rotas.
+
+```javascript
+// resources\js\routes\routers.js
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+import CategoriesComponent from '../components/admin/pages/categories/CategoriesComponent'
+import DashboardComponent from '../components/admin/pages/dashboard/DashboardComponent' // Adicionado import
+
+Vue.use(VueRouter)
+
+const routes = [
+    {path: '/categories', component: CategoriesComponent, name: 'admin.categories'},
+    {path: '/', component: DashboardComponent, name: 'admin.dashboard'} // Adcionado rota com prefixo admin.
+]
+
+...
+
+```
+
+
+
+
+
+
+
 ## Listagem Categorias
 
-10. Adicionar menu em `AdminComponent.vue`.
+11. Adicionar menu em `AdminComponent.vue`.
 ```vue
 <template>
     <div>
@@ -343,3 +384,14 @@ Vue.component('app-component', require('./components/App'))
     </div>
 </template>
 ```
+
+11.1 Alterar tag de component
+
+
+## Listar Categorias com Vuex
+
+12. 
+
+## Criar Component de Preloader
+
+13. 
