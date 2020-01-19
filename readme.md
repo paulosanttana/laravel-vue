@@ -18,6 +18,7 @@ Consumindo API Laravel com VueJs. Esse projeto utiliza Laravel 5.7 e Mysql.
 - [Configurando view routers](#Configurando-view-routers)
 - [Configurando Vuex](#Configurando-Vuex)
 - [BrowserSync](#BrowserSync)
+- [Administrando Categorias](#Administrando-Categorias)
 
 
 
@@ -207,3 +208,117 @@ mix.browserSync('http://127.0.0.1:8000/')
 npm run watch
 ``` 
 
+## Administrando Categorias
+
+**Organização estrutura Vue**
+
+9. Crie três pastas `admin` `frontend` e `layouts` dentro do diretório `components`
+
+>resources\js\components\admin  (todos components referente administração)
+>resources\js\components\frontend   todos components referente ao fronend
+>resources\js\components\layouts    todos compoents compativel ao frontend e backend
+
+9.1 Cria component `AdminComponent.vue` dentro da pasta `Admin`
+```javascript
+<template>
+    <div>
+        Sou o template de admin
+    </div>
+</template>
+
+<script>
+export default {
+    
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+
+9.2 Crie duas pastas `layouts` e `pages` dentro do diretório `admin`
+
+>resources\js\components\admin\layouts  (Todos components reutilizaveis dentro do compomente admin)
+>resources\js\components\admin\pages    (gestão de paginas de administração)
+
+9.3 Criar pasta `categories` dentro de `pages`. E adicione component `CategoriesComponent.vue`
+
+```javascript
+// resources\js\components\admin\pages\CategoriesComponent.vue
+
+<template>
+    <div>
+        Listagem das categories
+    </div>
+</template>
+
+<script>
+export default {
+    
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+
+9.4 Importar component `CategoriesComponent` em `routers.js`
+```javascript
+import CategoriesComponent from '../components/admin/pages/categories/CategoriesComponent'
+```
+
+
+9.5 Define a rota
+```javascript
+const routes = [
+    {path: '/categories', component: CategoriesComponent, name: 'categories'}
+]
+```
+
+9.6 Cria webComponent `App.vue` dentro `resources\js\components` 
+```javascript
+<template>
+    <div>
+        <router-view></router-view> //faz roteamento dos components
+    </div>
+</template>
+
+<script>
+export default {
+    
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+
+9.7 Declarar component `App.vue` dentro de `app.js`
+```javascript
+/***
+ * Components globais
+ */
+Vue.component('app-component', require('./components/App'))
+```
+
+9.8 Declara o component `app-component` dentro de `welcome.blade.php`
+```php
+// resoureces\welcome.blade.php
+    
+    ...
+
+  <body>
+        <div id="app">
+
+            <app-component></app-component> //Adicionado tag do component
+
+        </div>
+
+
+    <script src="{{ mix('/js/app.js') }}"></script>
+    </body>
+</html>
+```
