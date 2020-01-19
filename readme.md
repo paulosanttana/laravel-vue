@@ -281,7 +281,7 @@ const routes = [
 ```
 
 9.6 Cria webComponent `App.vue` dentro `resources\js\components` 
-```javascript
+```vue
 <template>
     <div>
         <router-view></router-view> //faz roteamento dos components
@@ -324,4 +324,22 @@ Vue.component('app-component', require('./components/App'))
     <script src="{{ mix('/js/app.js') }}"></script>
     </body>
 </html>
+```
+
+## Listagem Categorias
+
+10. Adicionar menu em `AdminComponent.vue`.
+```vue
+<template>
+    <div>
+        <ul>
+            <li>
+                <router-link :to="{name: 'admin.dashboard'}">Dashboard</router-link>
+            </li>
+            <li>
+                <router-link :to="{name: 'admin.categories'}">Categorias</router-link>
+            </li>
+        </ul>
+    </div>
+</template>
 ```

@@ -1,6 +1,13 @@
 <template>
     <div>
-        Sou o template de admin
+        <ul>
+            <li>
+                <router-link :to="{name: 'admin.dashboard'}">Dashboard</router-link>
+            </li>
+            <li>
+                <router-link :to="{name: 'admin.categories'}">Categorias</router-link>
+            </li>
+        </ul>
     </div>
 </template>
 
