@@ -1,6 +1,6 @@
 <template>
     <div class="preloader" v-show="preloader">
-        <img src="/image/loading3.gif" alt="Preloader...">
+        <img src="/image/loading5.gif" alt="Preloader...">
     </div>
 </template>
 

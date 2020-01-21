@@ -4,7 +4,7 @@ export default {
     },
     mutations: {
         PRELOADER (state, status) {
-            state.preloader = status
+            state.loading = status
         }
     },
     actions: {

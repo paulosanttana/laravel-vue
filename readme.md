@@ -5,7 +5,7 @@
 
 **Projeto Laravel + VueJs**
 
-Consumindo API Laravel com VueJs. Esse projeto utiliza Laravel 5.7 e Mysql.
+Consumindo API Laravel com VueJs. Esse projeto utiliza Laravel 5.7, VueJs, Bootstrap e Mysql.
 
 
 
@@ -395,3 +395,193 @@ const routes = [
 ## Criar Component de Preloader
 
 13. 
+
+## Preloader ao carregar Categoria
+
+14. Adicione na action que carrega as `Categorias` o carregamento do `PRELOADER`, antes de carregar o status será `true`, após o carregamento o status será `false`.
+```javascript
+// resources\js\vuex\modules\categories\categories.js
+
+actions: {
+        loadCategories (context) {
+            context.commit('PRELOADER', true)
+
+            axios.get('/api/v1/categories')
+                    .then(response => {
+                        console.log(response)
+
+                        context.commit('LOAD_CATEGORIES', response)
+                    })
+                    .catch(errors => {
+                        console.log(errors)
+                    })
+                    .finally(() => context.commit('PRELOADER', false))
+        }
+    },
+```
+
+## Pré-organizar Layout Admin
+
+15. No arquivo da view `welcome.blade.php` apague qualquer configuração `css` do template default do laravel, adicione o `css` da pasta `public` usando o `mix()`.
+```php
+// resources\views\welcome.blade.php
+
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+```
+15.1 No arquivo `_variables.scss` altere a cor do body para branco.
+```scss
+// Body
+$body-bg: #FFF;
+```
+
+15.2
+
+## Component de Categoria
+
+16. 
+
+## Cadastrar nova Categoria
+
+17.
+
+## Component Editar Categoria
+
+18. Criar component `EditCategoryComponent`.
+```vue
+<template>
+    <div>
+        <h1>Editar Categoria</h1>
+    </div>
+</template>
+
+<script>
+export default {
+    
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+
+18.1 Importa a rota e adiciona compomente na rota
+```javascript
+import EditCategoryComponent from '../components/admin/pages/categories/EditCategoryComponent'  // import adicionado
+
+...
+
+const routes = [
+    {
+        path: '/admin', 
+        component: AdminComponent,
+        children: [
+            {path: '', component: DashboardComponent, name: 'admin.dashboard'},
+            {path: 'categories', component: CategoriesComponent, name: 'admin.categories'},
+            {path: 'categories/create', component: AddCategoryComponent, name: 'admin.categories.create'},
+            {path: 'categories/:id/edit', component: EditCategoryComponent, name: 'admin.categories.edit'}  //Rota adicionada
+
+            ...
+...            
+```
+
+18.2 Adiciona botão no `<tbody>` do component `CategoriesComponent`.
+```php
+<tbody>
+    <tr v-for="(category, index) in categories.data" :key="index">
+        <td>{{ category.id }}</td>
+        <td>{{ category.name }}</td>
+        <td>
+            <router-link :to="{name: 'admin.categories.edit', params: {id: category.id}}" class="btn btn-info">Editar</router-link> // Novo botão 'Editar'
+        </td>
+    </tr>
+</tbody>
+```
+
+18.3 Carregar a categoria, no component `EditCategoryComponent` adiciona `props` onde será passado parametro `id` obrigatório.
+```javascript
+// resources\js\components\admin\pages\ategories\EditCategoryComponent
+
+export default {
+    // props espera que seja passado um campo obrigatório, ou seja, valores dinamicos da url.
+    props: {
+        id: {
+            require: true
+        }
+    },
+```
+
+18.4 Usar action do vuex. Criar método `loadCategory()`, adicione abaixo do método `loadCategories()`.
+```javascript
+// resources\js\vuex\modules\categories\categories.js
+
+...
+
+loadCategory (context, id) {
+    context.commit('PRELOADER', true)
+
+    return new Promise ((resolve, reject) => {
+        axios.get(`/api/v1/categories/${id}`)
+            .then(response => resolve(response.data))
+            .catch(error => reject(error))
+            .finally(() => context.commit('PRELOADER', false))            
+    })
+},
+...
+```
+
+18.5 Agora no `EditCategoryComponent` faz a chamada do action `loadCategory()`. Após esse proceidmento já será possível visualizar o retorno pelo devtools.
+```javascript
+// resources\js\components\admin\pages\ategories\EditCategoryComponent
+...
+created () {
+    this.$store.dispatch('loadCategory', this.id)
+                    .then(response => this.category = response)
+                    .catch(error => {
+                        console.log(error)
+                    })
+}
+    ...
+```
+18.6 Adiciona o formulário em `EditCategoryComponent`.
+```vue
+
+<template>
+    <div>
+        <h1>Editar Categoria</h1>
+
+        <form class="form" @submit.prevent="submitForm">
+            <div class="form-group">
+                <input type="text" v-model="category.name" class="form-control" placeholder="Nome da Categoria">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
+</template>
+```
+
+18.6 Adicione o `data()` abaixo do método `created ()` para iniciar a variavel vazia, essa que receberá o valor do form.
+```javascript
+...
+
+data () {
+        return {
+            category: {
+                name: ''
+            }
+        }
+    }
+```
+
+## Compoenent de Formulário de Categoria
+
+19.
+
+19.1
+19.2
+19.3
+19.4
+
