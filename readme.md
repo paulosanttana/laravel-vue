@@ -578,10 +578,88 @@ data () {
 
 ## Compoenent de Formulário de Categoria
 
-19.
+Objetivo é criar um unico formulário para usar nos components da aplicação.
 
-19.1
-19.2
-19.3
-19.4
+19. Criar pasta `partials`(conterá components comuns a categoria) dentro de `categories` e criar componente `FormCategoryComponent` que será o formulário padrão.
+```javascript
+// resources\js\components\admin\pages\ategories\partials\FormCategoryComponent
+
+<template>
+    <div>
+        <h1>Editar Categoria</h1>
+
+    </div>
+</template>
+
+<script>
+export default {
+    
+}
+</script>
+
+<style scoped>
+
+</style>
+
+```
+
+19.1 Adiciona o mesmo formulário que já existe nos components `AddCategoryComponent` e `EditCategoryComponente`. Após cópiar o formulário pode excluir o mesmo dos components `AddCategoryComponent` e `EditCategoryComponente`.
+```javascript
+
+```
+
+
+19.2 Cria `props` em `FormCategoryComponent` para fazer o bind. E no `v-model` do input adiciona atributo `category.name`.
+```javascript
+...
+
+<input type="text" v-model="category.name" class="form-control" placeholder="Nome da Categoria">
+
+...
+
+<script>
+export default {
+    props: {
+        category: {
+            require: false,
+            type: Object|Array,
+            default: () => {
+                return {
+                    name: ''
+                }
+            }
+        }
+    }
+}
+</script>
+```
+
+
+19.3 Importa o component ## no component ##
+```vue
+<script>
+import FormCategoryComponent from './partials/FormCategoryComponent'
+
+export default {
+    data () {
+        // Pega o valor do form
+        return {
+            name: ''
+        }
+    },
+    methods: {
+        // Passa a responsabilidade de cadastro para Vuex 'categories.js'
+        submitForm () {
+            this.$store.dispatch('storeCategory', {name: this.name})
+                            .then(() => this.$router.push({name: 'admin.categories'}))
+                            .catch()
+        }
+    },
+    components: {
+        formCat: FormCategoryComponent
+    }
+}
+</script>
+```
+19.4 Adicionar formulário em `EditCategoryComponent`
 
