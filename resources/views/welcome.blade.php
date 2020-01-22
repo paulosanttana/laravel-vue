@@ -13,6 +13,8 @@
     </head>
     <body>
         <div id="app">
+            <vue-snotify></vue-snotify>
+            
             <preloader-component></preloader-component>
 
             

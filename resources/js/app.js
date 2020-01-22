@@ -7,10 +7,13 @@
 
 require('./bootstrap');
 window.Vue = require('vue');
-
+import Snotify from 'vue-snotify'   //Importado pacote
 
 import router from './routes/routers'
 import store from './vuex/store'
+
+Vue.use(Snotify, {toast: {showProgressBar: false}}) // Usa no Vue o pacote e passa parametro de false para a ação de barra progressiva 'showProgressBar'.
+
 
 /***
  * Components globais

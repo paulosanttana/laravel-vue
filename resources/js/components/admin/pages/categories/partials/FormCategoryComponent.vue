@@ -2,7 +2,8 @@
     <div>
         
         <form class="form" @submit.prevent="onSubmit">
-            <div class="form-group">
+            <div :class="['form-group', {'has-error': errors.name}]">
+                <div v-if="errors.name">{{ errors.name[0] }}</div>
                 <input type="text" v-model="category.name" class="form-control" placeholder="Nome da Categoria">
             </div>
 
@@ -32,14 +33,28 @@ export default {
             default: false, // NÃO FAZ UPDATE
         }
     },
+    data () {
+        return {
+            errors: {}
+        }
+    },
     methods: {
         // Passa a responsabilidade de cadastro para Vuex 'categories.js'
         onSubmit () {
             const action = this.updating ? 'updateCategory' : 'storeCategory'
 
             this.$store.dispatch(action, this.category)
-                            .then(() => this.$router.push({name: 'admin.categories'}))
-                            .catch()
+                            .then(() => {
+                                this.$snotify.success('Sucesso ao cadastrar')
+
+                                this.$router.push({name: 'admin.categories'})
+                            })
+                            .catch(error => {   
+                                this.$snotify.error('Algo deu errado', 'Erro')
+                                
+                                console.log(error.response.data.errors)
+                                this.errors = error.response.data.errors
+                            })
         }
     }
 
@@ -47,5 +62,6 @@ export default {
 </script>
 
 <style scoped>
-
+.has-error {color: red;}
+.has-error input{border: 1px solid red;}
 </style>

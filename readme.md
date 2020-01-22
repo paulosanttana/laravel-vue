@@ -669,7 +669,99 @@ export default {
 
 ## Instalação e Configurar o Vue-Snotify
 
-Ferramenta utilizada para criar notificações em VueJs.
-Link: [Vue-Snotify](https://artemsky.github.io/vue-snotify/)
+ [Vue-Snotify](https://artemsky.github.io/vue-snotify/) e uma ferramenta utilizada para criar notificações em VueJs.
 
-21.
+21. Instalar Vue-Snotify
+```bash
+npm install --save-dev vue-snotify
+```
+
+**Configuração do pacote Vue-Snotify**
+
+21.1  importa o pacote `Vue-Snotify`
+```javascript
+// resources\js\app.js
+
+require('./bootstrap');
+window.Vue = require('vue');
+import Snotify from 'vue-snotify'   //Importado pacote
+
+import router from './routes/routers'
+import store from './vuex/store'
+
+Vue.use(Snotify, {toast: {showProgressBar: false}}) // Usa no Vue o pacote e passa parametro de false para a ação de barra progressiva 'showProgressBar'.
+
+...
+```
+
+21.2 Utilizar o componente no template padrão `welcome.blade.php`.
+```php
+<body>
+        <div id="app">
+            <vue-snotify></vue-snotify> // Adicionado TAG 
+            
+            <preloader-component></preloader-component>
+
+            
+            <router-view></router-view>
+
+        </div>
+
+
+    <script src="{{ mix('/js/app.js') }}"></script>
+    </body>
+```
+
+21.3 Importar o `.css` do pacote.
+```scss
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Snotify
+@import "~vue-snotify/styles/material"; //Adicionado .css do pacote Snotify
+
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+```
+
+## Exibir Erros de Validação Laravel com VueJs
+
+22.
+
+## Exibir Alerts com Snotify
+
+23. Adicione nas resposta do `ajax` a biblioteca `Snotify`.
+```vue
+
+<script>
+...
+
+methods: {
+        // Passa a responsabilidade de cadastro para Vuex 'categories.js'
+        onSubmit () {
+            const action = this.updating ? 'updateCategory' : 'storeCategory'
+
+            this.$store.dispatch(action, this.category)
+                            .then(() => {
+                                this.$snotify.success('Sucesso ao cadastrar')   //ADICIONADO PACOTE SNOTIFY C/ RESPOSTA DE SUCESSO AO CADASTRAR
+
+                                this.$router.push({name: 'admin.categories'})
+                            })
+                            .catch(error => {   
+                                this.$snotify.error('Algo deu errado', 'Erro')  //ADICIONADO PACOTE SNOTIFY C/ RESPOSTA DE ERROR AO CADASTRAR
+                                
+                                console.log(error.response.data.errors)
+                                this.errors = error.response.data.errors
+                            })
+        }
+        
+```
