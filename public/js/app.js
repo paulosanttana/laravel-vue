@@ -1814,6 +1814,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _partials_FormCategoryComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./partials/FormCategoryComponent */ "./resources/js/components/admin/pages/categories/partials/FormCategoryComponent.vue");
 //
 //
 //
@@ -1822,6 +1823,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   // props espera que seja passado um campo obrigatório, ou seja, valores dinamicos.
   props: {
@@ -1837,6 +1842,14 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (error) {
       console.log(error);
     });
+  },
+  data: function data() {
+    return {
+      category: {}
+    };
+  },
+  components: {
+    formCat: _partials_FormCategoryComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -1873,9 +1886,17 @@ __webpack_require__.r(__webpack_exports__);
       type: Object | Array,
       "default": function _default() {
         return {
+          id: '',
           name: ''
         };
       }
+    },
+    updating: {
+      require: false,
+      //NÃO OBRIGATÓRIO
+      type: Boolean,
+      "default": false // NÃO FAZ UPDATE
+
     }
   },
   methods: {
@@ -1883,7 +1904,8 @@ __webpack_require__.r(__webpack_exports__);
     onSubmit: function onSubmit() {
       var _this = this;
 
-      this.$store.dispatch('storeCategory', this.category).then(function () {
+      var action = this.updating ? 'updateCategory' : 'storeCategory';
+      this.$store.dispatch(action, this.category).then(function () {
         return _this.$router.push({
           name: 'admin.categories'
         });
@@ -21021,16 +21043,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("Editar Categoria")]),
+      _vm._v(" "),
+      _c("form-cat", { attrs: { category: _vm.category, updating: true } })
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Editar Categoria")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -37971,6 +37994,18 @@ __webpack_require__.r(__webpack_exports__);
       context.commit('PRELOADER', true);
       return new Promise(function (resolve, reject) {
         axios.post('/api/v1/categories', params).then(function (response) {
+          return resolve();
+        })["catch"](function (error) {
+          return reject(error);
+        })["finally"](function () {
+          return context.commit('PRELOADER', false);
+        });
+      });
+    },
+    updateCategory: function updateCategory(context, params) {
+      context.commit('PRELOADER', true);
+      return new Promise(function (resolve, reject) {
+        axios.put("/api/v1/categories/".concat(params.id), params).then(function (response) {
           return resolve();
         })["catch"](function (error) {
           return reject(error);

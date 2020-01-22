@@ -21,15 +21,23 @@ export default {
             type: Object|Array,
             default: () => {
                 return {
-                    name: ''
+                    id: '',
+                    name: '',
                 }
             }
+        },
+        updating: {
+            require: false, //NÃO OBRIGATÓRIO
+            type: Boolean,
+            default: false, // NÃO FAZ UPDATE
         }
     },
     methods: {
         // Passa a responsabilidade de cadastro para Vuex 'categories.js'
         onSubmit () {
-            this.$store.dispatch('storeCategory', this.category)
+            const action = this.updating ? 'updateCategory' : 'storeCategory'
+
+            this.$store.dispatch(action, this.category)
                             .then(() => this.$router.push({name: 'admin.categories'}))
                             .catch()
         }

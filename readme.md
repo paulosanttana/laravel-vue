@@ -663,3 +663,13 @@ export default {
 ```
 19.4 Adicionar formulário em `EditCategoryComponent`
 
+## Cadastrar e Editar Categoria Form Compoent
+
+20.
+
+## Instalação e Configurar o Vue-Snotify
+
+Ferramenta utilizada para criar notificações em VueJs.
+Link: [Vue-Snotify](https://artemsky.github.io/vue-snotify/)
+
+21.
