@@ -1791,14 +1791,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    this.$store.dispatch('loadCategories');
+    this.loadCategories();
   },
   computed: {
     categories: function categories() {
       return this.$store.state.categories.items;
+    }
+  },
+  methods: {
+    loadCategories: function loadCategories() {
+      this.$store.dispatch('loadCategories');
+    },
+    confirmdestroy: function confirmdestroy(category) {
+      var _this = this;
+
+      this.$snotify.error("Deseja realmente deletar categoria: ".concat(category.name), 'Deletar?', {
+        timout: 10000,
+        //tempo de notificação
+        showProgressBar: true,
+        closeOnClick: true,
+        buttons: [{
+          text: 'Não',
+          action: function action() {
+            return console.log('Não deletou...');
+          }
+        }, {
+          text: 'Sim',
+          action: function action() {
+            return _this.destroy(category);
+          }
+        }]
+      });
+    },
+    destroy: function destroy(category) {
+      var _this2 = this;
+
+      this.$store.dispatch('destroyCategory', category.id).then(function () {
+        _this2.$snotify.success("Sucesso ao deletar a categoria: ".concat(category.name));
+
+        _this2.loadCategories();
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this2.$snotify.error('Erro ao deletar a categoria', 'Falha');
+      });
     }
   }
 });
@@ -1835,18 +1876,27 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this = this;
-
-    this.$store.dispatch('loadCategory', this.id).then(function (response) {
-      return _this.category = response;
-    })["catch"](function (error) {
-      console.log(error);
-    });
+    this.loadCategory();
   },
   data: function data() {
     return {
       category: {}
     };
+  },
+  methods: {
+    loadCategory: function loadCategory() {
+      var _this = this;
+
+      this.$store.dispatch('loadCategory', this.id).then(function (response) {
+        return _this.category = response;
+      })["catch"](function (error) {
+        _this.$snotify.error('Categoria não encontrada', '404');
+
+        _this.$router.push({
+          name: 'admin.categories'
+        });
+      });
+    }
   },
   components: {
     formCat: _partials_FormCategoryComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -21055,6 +21105,21 @@ var render = function() {
                       }
                     },
                     [_vm._v("Editar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.confirmdestroy(category)
+                        }
+                      }
+                    },
+                    [_vm._v("Remover")]
                   )
                 ],
                 1
@@ -21079,7 +21144,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("NOME")]),
         _vm._v(" "),
-        _c("th", { attrs: { width: "100" } }, [_vm._v("AÇÕES")])
+        _c("th", { attrs: { width: "200" } }, [_vm._v("AÇÕES")])
       ])
     ])
   }
@@ -39545,6 +39610,16 @@ __webpack_require__.r(__webpack_exports__);
         })["finally"](function () {
           return context.commit('PRELOADER', false);
         });
+      });
+    },
+    destroyCategory: function destroyCategory(context, id) {
+      context.commit('PRELOADER', true);
+      return new Promise(function (resolve, reject) {
+        axios["delete"]("/api/v1/categories/".concat(id)).then(function (response) {
+          return resolve();
+        })["catch"](function (error) {
+          return reject(error);
+        }); // .finally(() => context.commit('PRELOADER', false))            
       });
     }
   },

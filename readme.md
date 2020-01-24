@@ -741,8 +741,9 @@ Vue.use(Snotify, {toast: {showProgressBar: false}}) // Usa no Vue o pacote e pas
 
 23. Adicione nas resposta do `ajax` a biblioteca `Snotify`.
 ```vue
-
 <script>
+// resources\js\components\admin\pages\ategories\partials\FormCategoryComponent
+
 ...
 
 methods: {
@@ -765,3 +766,14 @@ methods: {
         }
         
 ```
+
+## Deletar Categoria
+
+24. Inserir botão no table
+```javascript
+
+```
+
+**Confirmação ao Deletar Categoria**
+
+24.1
