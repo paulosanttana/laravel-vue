@@ -247,7 +247,8 @@ export default {
 
 9.3 Criar pasta `categories` dentro de `pages`. E adicione component. `CategoriesComponent.vue`
 
-```javascript
+```vue
+<script>
 // resources\js\components\admin\pages\CategoriesComponent.vue
 
 <template>
@@ -330,6 +331,7 @@ Vue.component('app-component', require('./components/App'))
 
 10. Criar pasta `dashboard` dentro de `reources\js\components\admin\pages`, em seguida adicione crie component `DashboardComponent.vue`.
 ```vue 
+<script>
 // reources\js\components\admin\pages\DashboardComponent
 
 <template>
@@ -385,16 +387,16 @@ const routes = [
 </template>
 ```
 
-11.1 Alterar tag de component
+11.1 Alterar tag de component  `(Falta procedimento...)`
 
 
 ## Listar Categorias com Vuex
 
-12. 
+12.  `(Falta procedimento...)`
 
 ## Criar Component de Preloader
 
-13. 
+13.  `(Falta procedimento...)`
 
 ## Preloader ao carregar Categoria
 
@@ -434,15 +436,15 @@ actions: {
 $body-bg: #FFF;
 ```
 
-15.2
+15.2 `(Falta procedimento...)`
 
 ## Component de Categoria
 
-16. 
+16.  `(Falta procedimento...)`
 
 ## Cadastrar nova Categoria
 
-17.
+17. `(Falta procedimento...)`
 
 ## Component Editar Categoria
 
@@ -603,9 +605,9 @@ export default {
 
 ```
 
-19.1 Adiciona o mesmo formulário que já existe nos components `AddCategoryComponent` e `EditCategoryComponente`. Após cópiar o formulário pode excluir o mesmo dos components `AddCategoryComponent` e `EditCategoryComponente`.
+19.1 Adiciona o mesmo formulário que já existe nos components `AddCategoryComponent` e `EditCategoryComponente`. Após cópiar o formulário pode excluir o mesmo dos components `AddCategoryComponent` e `EditCategoryComponente`. `(Falta procedimento...)`
 ```javascript
-
+//  (Falta procedimento...)
 ```
 
 
@@ -635,7 +637,7 @@ export default {
 ```
 
 
-19.3 Importa o component ## no component ##
+19.3 Importa o component ## no component ## `(Falta procedimento...)`
 ```vue
 <script>
 import FormCategoryComponent from './partials/FormCategoryComponent'
@@ -665,7 +667,7 @@ export default {
 
 ## Cadastrar e Editar Categoria Form Compoent
 
-20.
+20. `(Falta procedimento...)`
 
 ## Instalação e Configurar o Vue-Snotify
 
@@ -735,7 +737,7 @@ Vue.use(Snotify, {toast: {showProgressBar: false}}) // Usa no Vue o pacote e pas
 
 ## Exibir Erros de Validação Laravel com VueJs
 
-22.
+22. `(Falta procedimento...)`
 
 ## Exibir Alerts com Snotify
 
@@ -769,11 +771,18 @@ methods: {
 
 ## Deletar Categoria
 
-24. Inserir botão no table
+24. Inserir botão no table `(Falta procedimento...)`
 ```javascript
-
+ `(Falta procedimento...)`
 ```
 
 **Confirmação ao Deletar Categoria**
 
-24.1
+24.1 `(Falta procedimento...)`
+
+
+## Filtros Categoria
+
+**Criar campo Search**
+
+25. Adiciona `(Falta procedimento...)`

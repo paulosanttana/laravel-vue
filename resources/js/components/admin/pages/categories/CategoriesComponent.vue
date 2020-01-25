@@ -2,7 +2,14 @@
     <div>
         <h1>Listagem das Categorias</h1>
 
-        <router-link :to="{name: 'admin.categories.create'}" class="btn btn-success">Cadastrar</router-link>
+        <div class="row">
+            <div class="col">
+                <router-link :to="{name: 'admin.categories.create'}" class="btn btn-success">Cadastrar</router-link>
+            </div>
+            <div class="col">
+                <search @searchCategory="search"></search>
+            </div>
+        </div>
 
         <table class="table table-dark">
             <thead>
@@ -30,9 +37,17 @@
 <script>
 import axios from 'axios'
 
+import SearchCategoryComponent from './partials/SearchCategoryComponent'
+
+
 export default {
     created () {
         this.loadCategories()
+    },
+    data () {
+        return {
+            name: '',
+        }
     },
     computed: {
         categories () {
@@ -41,7 +56,7 @@ export default {
     },
     methods: {
         loadCategories () {
-            this.$store.dispatch('loadCategories')
+            this.$store.dispatch('loadCategories', {name: this.name})
         },
         confirmdestroy (category) {
             this.$snotify.error(`Deseja realmente deletar categoria: ${category.name}`, 'Deletar?', {
@@ -54,6 +69,7 @@ export default {
                 ]
             })
         },
+
         destroy(category) {
             this.$store.dispatch('destroyCategory', category.id)
                             .then(() => {
@@ -66,8 +82,17 @@ export default {
 
                                 this.$snotify.error('Erro ao deletar a categoria', 'Falha')
                             })
-        }
-    }
+        },
+
+        search (filter) {
+            this.name = filter
+
+            this.loadCategories()
+        },
+    },
+            components: {
+                search: SearchCategoryComponent
+            }
 }
 </script>
 
